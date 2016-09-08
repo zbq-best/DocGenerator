@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Doc Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
+</head>
+
+<body>
+<nav>
+    <div class="nav-wrapper teal lighten-2">
+        <a href="#" class="brand-logo">Doc Generator</a>
+    </div>
+</nav>
+
+<div class="row">
+    <form class="col s12">
+        <div class="row">
+
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="docName" type="text" class="validate">
+                <label for="docName">文件名</label>
+            </div>
+
+            <div class="input-field col s12">
+                <input id="content" type="text" class="validate">
+                <label for="content">内容</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 center-align">
+                <a class="waves-effect waves-light btn" id="generate">生成</a>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+            <div class="col s12 m5 center-align">
+                <p class="teal-text text-darken-2 center-align">注：根据实际情况更改模板</p>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#generate").click(function(){
+
+            var docName = $("#docName").val();
+            var content = $("#content").val();
+
+            $.ajax( {
+                url:'/generate',
+                data:{
+                    docName: docName,
+                    content: content
+                },
+                type:'post',
+                async: true,
+                success:function(data) {
+                    Materialize.toast(data, 3000);
+                }
+            });
+        });
+
+    });
+</script>
+</body>
+</html>
